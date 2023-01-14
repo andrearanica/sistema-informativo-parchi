@@ -27,13 +27,30 @@ export const getAnimalById = (req, res) => {
     connection.connect()
     connection.query(`SELECT * FROM animali WHERE id_animale=${ req.params.id }`, (err, result, fields) => {
         if (err) { 
-            res.json({ message: err.message })
+            res.status(400).json({ message: err.message })
         } else {
             if (result.length > 0) {
-                res.json({ result: result[0] })
+                res.status(200).json({ result: result[0] })
             } else {
-                res.json({ result: 'Animal not found' })
+                res.status(404).json({ result: 'Animal not found' })
             }
+        }
+    })
+}
+
+export const getAllParks = (req, res) => {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'sistema-informativo-parchi'
+    })
+    connection.connect()
+    connection.query(`SELECT * FROM parchi`, (err, result, fields) => {
+        if (err) { 
+            res.status(400).json({ message: err.message })
+        } else {
+            res.status(200).json({ result: result })
         }
     })
 }
