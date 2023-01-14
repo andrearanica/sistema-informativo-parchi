@@ -1,8 +1,9 @@
 import express from 'express'
-import { getAllAnimals } from '../controllers/info.js'
+import { getAllAnimals, getAnimalById } from '../controllers/info.js'
 
 const router = express.Router()
 
-router.get('/', getAllAnimals)
+router.get('/',    getAllAnimals)
+router.get('/:id', getAnimalById)
 
 export default router
