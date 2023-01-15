@@ -25,7 +25,7 @@ export const getAnimalById = (req, res) => {
         database: 'sistema-informativo-parchi'
     })
     connection.connect()
-    connection.query(`SELECT * FROM animali WHERE id_animale=${ req.params.id }`, (err, result, fields) => {
+    connection.query(`SELECT * FROM animali INNER JOIN specie ON animali.id_specie=specie.id_specie WHERE id_animale=${ req.params.id }`, (err, result, fields) => {
         if (err) { 
             res.status(400).json({ message: err.message })
         } else {
