@@ -54,3 +54,20 @@ export const getAllParks = (req, res) => {
         }
     })
 }
+
+export const getSpeciesFromPark = (req, res) => {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'sistema-informativo-parchi'
+    })
+    connection.connect()
+    connection.query(`SELECT * FROM specie INNER JOIN parchi ON specie.id_parco=parchi.id_parco WHERE nome_parco="${ req.params.park }"`, (err, result, fields) => {
+        if (err) { 
+            res.status(400).json({ message: err.message })
+        } else {
+            res.status(200).json({ result: result })
+        }
+    })
+}
