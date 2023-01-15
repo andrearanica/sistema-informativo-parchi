@@ -6,6 +6,8 @@ function Search () {
     const [research, setResearch] = useState('')
     const [result, setResult] = useState({})
     const [parks, setParks] = useState([])
+    const [selectedPark, setSelectedPark] = useState('')
+    const [species, setSpecies] = useState([])
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8080/info/parks')
@@ -23,9 +25,15 @@ function Search () {
         .catch(setResult({}))
     }
 
+    function searchSpecies () {
+        axios.get(`http://127.0.0.1:8080/info/species/${ 'Parco delle Cornelle' }`)
+        .then(res => console.log(res))
+    }
+
     return (
         <div className="container my-4" id="divTitle">
             <h1>🔎 Ricerca</h1>
+            { /*
             <select className="form-control my-1">
                 {
                     parks.map(p => <option>{ p.nome_parco }</option>)
@@ -35,7 +43,17 @@ function Search () {
                 <input class="form-control" type="search" placeholder="Cerca" aria-label="Search" onChange={ e => setResearch(e.target.value) } />
                 <button class="btn bg-light my-1" type="submit">Cerca per ID</button>
             </form>
-            { result.dataDiNascita ? <p>{ result.dataDiNascita }</p> : null }
+            <hr />
+            { result ? <Animal animal={ result } /> : null }
+            */ }
+            <select className="form-control my-1" onChange={ e => { setSelectedPark(e.target.value); console.log(e.target.value); } }>
+                <option value=''>Seleziona un parco</option>
+                {
+                    parks.map(p => <option value={ p.nome_parco }>{ p.nome_parco }</option>)
+                }
+            </select>
+            { selectedPark !== '' && species === [] ? searchSpecies() : null }
+            { species !== [] ? console.log(species) : null }
         </div>
     )
 
