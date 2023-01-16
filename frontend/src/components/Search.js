@@ -26,34 +26,21 @@ function Search () {
     }
 
     function searchSpecies () {
-        axios.get(`http://127.0.0.1:8080/info/species/${ 'Parco delle Cornelle' }`)
+        console.log(selectedPark)
+        axios.get(`http://127.0.0.1:8080/info/species/${ selectedPark }`)
         .then(res => console.log(res))
     }
 
     return (
         <div className="container my-4" id="divTitle">
             <h1>🔎 Ricerca</h1>
-            { /*
-            <select className="form-control my-1">
+            <select className="form-control my-1" onChange={ e => { setSelectedPark(e.target.value) } }>
+                <option hidden disabled selected defaultValue=''>Seleziona un parco</option>
                 {
-                    parks.map(p => <option>{ p.nome_parco }</option>)
+                    parks.map(p => <option default={ p.nome_parco }>{ p.nome_parco }</option>)
                 }
             </select>
-            <form role="search" onSubmit={ searchAnimal }>
-                <input class="form-control" type="search" placeholder="Cerca" aria-label="Search" onChange={ e => setResearch(e.target.value) } />
-                <button class="btn bg-light my-1" type="submit">Cerca per ID</button>
-            </form>
-            <hr />
-            { result ? <Animal animal={ result } /> : null }
-            */ }
-            <select className="form-control my-1" onChange={ e => { setSelectedPark(e.target.value); console.log(e.target.value); } }>
-                <option value=''>Seleziona un parco</option>
-                {
-                    parks.map(p => <option value={ p.nome_parco }>{ p.nome_parco }</option>)
-                }
-            </select>
-            { selectedPark !== '' && species === [] ? searchSpecies() : null }
-            { species !== [] ? console.log(species) : null }
+            { selectedPark !== '' ? searchSpecies() : null }
         </div>
     )
 
