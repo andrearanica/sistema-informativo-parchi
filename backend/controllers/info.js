@@ -71,3 +71,37 @@ export const getSpeciesFromPark = (req, res) => {
         }
     })
 }
+
+export const getSpecieInfo = (req, res) => {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'sistema-informativo-parchi'
+    })
+    connection.connect()
+    connection.query(`SELECT * FROM animali INNER JOIN parchi ON animali.id_parco=parchi.id_parco INNER JOIN specie ON animali.id_specie=specie.id_specie WHERE nome_parco="${ req.params.park }" AND nome_specie="${ req.params.specie }"`, (err, result, fields) => {
+        if (err) { 
+            res.status(400).json({ message: err.message })
+        } else {
+            res.status(200).json({ result: result })
+        }
+    })
+}
+
+export const getStatistics = (req, res) => {
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'sistema-informativo-parchi'
+    })
+    connection.connect()
+    connection.query(`SELECT (AVG(dataDiNascita)) FROM animali INNER JOIN parchi ON animali.id_parco=parchi.id_parco INNER JOIN specie ON animali.id_specie=specie.id_specie WHERE nome_parco="${ req.params.park }" AND nome_specie="${ req.params.specie }"`, (err, result, fields) => {
+        if (err) { 
+            res.status(400).json({ message: err.message })
+        } else {
+            res.status(200).json({ result: result })
+        }
+    })
+}
