@@ -12,7 +12,11 @@ function Search () {
     useEffect(() => {
         axios.get('http://127.0.0.1:8080/info/parks')
         .then(res => setParks(res.data.result))
-    }, [])
+        if (selectedPark != '') {
+            axios.get(`http://127.0.0.1:8080/info/species/${ selectedPark }`)
+            .then(res => setSpecies(res.data.result))
+        }
+    }, [selectedPark])
 
     function searchAnimal (e) {
         e.preventDefault()
@@ -25,22 +29,20 @@ function Search () {
         .catch(setResult({}))
     }
 
-    function searchSpecies () {
-        console.log(selectedPark)
-        axios.get(`http://127.0.0.1:8080/info/species/${ selectedPark }`)
-        .then(res => console.log(res))
-    }
-
     return (
         <div className="container my-4" id="divTitle">
             <h1>🔎 Ricerca</h1>
             <select className="form-control my-1" onChange={ e => { setSelectedPark(e.target.value) } }>
                 <option hidden disabled selected defaultValue=''>Seleziona un parco</option>
                 {
-                    parks.map(p => <option default={ p.nome_parco }>{ p.nome_parco }</option>)
+                    parks.map(p => <option defaultValue={ p.nome_parco }>{ p.nome_parco }</option>)
                 }
             </select>
-            { selectedPark !== '' ? searchSpecies() : null }
+            <hr />
+            <h4>Specie nel { selectedPark }</h4>
+            { 
+                species.map(s => <p>{ s.nome_specie }</p>)
+            }
         </div>
     )
 
