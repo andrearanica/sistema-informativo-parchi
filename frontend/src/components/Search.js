@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Data from './Data'
 
 function Search () {
 
-    const [research, setResearch] = useState('')
-    const [result, setResult] = useState({})
     const [parks, setParks] = useState([])
     const [selectedPark, setSelectedPark] = useState('')
     const [species, setSpecies] = useState([])
+    const [selectedSpecie, setSelectedSpecie] = useState('')
+    const [data, setData] = useState({})
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8080/info/parks')
@@ -16,18 +17,11 @@ function Search () {
             axios.get(`http://127.0.0.1:8080/info/species/${ selectedPark }`)
             .then(res => setSpecies(res.data.result))
         }
-    }, [selectedPark])
-
-    function searchAnimal (e) {
-        e.preventDefault()
-        axios.get(`http://127.0.0.1:8080/info/${ research }`)
-        .then(res => {
-            if (res.data.result !== 'Animal not found') {
-                setResult(res.data.result)
-            }
-        })
-        .catch(setResult({}))
-    }
+        if (selectedSpecie != '') {
+            axios.get(`http://127.0.0.1:8080/info/${ selectedPark }/${ selectedSpecie }`)
+            .then(res => setData(res.data.result))
+        }
+    }, [selectedPark, selectedSpecie])
 
     return (
         <div className="container my-4" id="divTitle">
@@ -39,10 +33,14 @@ function Search () {
                 }
             </select>
             <hr />
-            <h4>Specie nel { selectedPark }</h4>
-            { 
-                species.map(s => <p>{ s.nome_specie }</p>)
-            }
+            <select className="form-control my-1" onChange={ e => { setSelectedSpecie(e.target.value) } }>
+                <option hidden disabled selected defaultValue=''>Seleziona una specie</option>
+                { 
+                    species.map(s => <option defaultValue={ s.nome_specie }>{ s.nome_specie }</option>)
+                }
+            </select>
+            <hr />
+            { data !== { } ? <Data data={ data }/> : null }
         </div>
     )
 
