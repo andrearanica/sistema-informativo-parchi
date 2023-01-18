@@ -40,7 +40,7 @@ function Search () {
                 }
             </select>
             <hr />
-            { data !== { } ? <Data data={ data }/> : null }
+            { data !== { } ? <Data selectedPark={ selectedPark } selectedSpecie={ selectedSpecie } data={ data }/> : null }
         </div>
     )
 
