@@ -26,7 +26,7 @@ function Search () {
     return (
         <div className="container my-4" id="divTitle">
             <h1>🔎 Ricerca</h1>
-            <select className="form-control my-1" onChange={ e => { setSelectedPark(e.target.value); setSelectedSpecie('') } }>
+            <select className="form-control my-1" onClick={ e => { setSelectedPark(e.target.value); setSelectedSpecie('') } }>
                 <option hidden disabled selected defaultValue=''>Seleziona un parco</option>
                 {
                     parks.map(p => <option defaultValue={ p.nome_parco }>{ p.nome_parco }</option>)
