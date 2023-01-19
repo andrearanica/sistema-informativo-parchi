@@ -97,11 +97,11 @@ export const getAverageAge = (req, res) => {
         database: 'sistema-informativo-parchi'
     })
     connection.connect()
-    connection.query(`SELECT * FROM animali INNER JOIN parchi ON animali.id_parco=parchi.id_parco INNER JOIN specie ON animali.id_specie=specie.id_specie WHERE nome_parco="${ req.params.park }" AND nome_specie="${ req.params.specie }"`, (err, result, fields) => {
+    connection.query(`SELECT ROUND(AVG(YEAR(NOW()) - YEAR(dataDiNascita)), 2) AS average FROM animali INNER JOIN parchi ON animali.id_parco=parchi.id_parco INNER JOIN specie ON animali.id_specie=specie.id_specie WHERE nome_parco="${ req.params.park }" AND nome_specie="${ req.params.specie }"`, (err, result, fields) => {
         if (err) { 
             res.status(400).json({ message: err.message })
         } else {
-            res.status(200).json({ result: result })
+            res.status(200).json({ result: result[0].average })
         }
     })
 }

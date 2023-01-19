@@ -7,6 +7,7 @@ import infoRouter from './routers/info.js'
 const app = express()
 dotenv.config()
 
+app.use(express.json())
 app.use(cors())
 app.use('/info', infoRouter)
 
