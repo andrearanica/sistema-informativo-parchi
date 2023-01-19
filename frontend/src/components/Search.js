@@ -26,14 +26,14 @@ function Search () {
     return (
         <div className="container my-4" id="divTitle">
             <h1>🔎 Ricerca</h1>
-            <select className="form-control my-1" onChange={ e => { setSelectedPark(e.target.value) } }>
+            <select className="form-control my-1" onChange={ e => { setSelectedPark(e.target.value); setSelectedSpecie('') } }>
                 <option hidden disabled selected defaultValue=''>Seleziona un parco</option>
                 {
                     parks.map(p => <option defaultValue={ p.nome_parco }>{ p.nome_parco }</option>)
                 }
             </select>
             <hr />
-            <select className="form-control my-1" onChange={ e => { setSelectedSpecie(e.target.value) } }>
+            <select className="form-control my-1" onClick={ e => { setSelectedSpecie(e.target.value) } }>
                 <option hidden disabled selected defaultValue=''>Seleziona una specie</option>
                 { 
                     species.map(s => <option defaultValue={ s.nome_specie }>{ s.nome_specie }</option>)
