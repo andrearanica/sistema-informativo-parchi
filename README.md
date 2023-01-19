@@ -1,5 +1,5 @@
 # Sistema Informativo Parchi
-Questo progetto è l'esecuzione del tema di esame della maturità di informatica come esercitazione [(traccia)](https://fabrizioviscardi.it/_esame_di_stato/esame_di_stato_2011_ordinamento_prova_tema_informatica_M070-parchi-regionali.pdf)
+Questo progetto è l'esecuzione del tema di esame della maturità di informatica come esercitazione [(traccia)](https://fabrizioviscardi.it/_esame_di_stato/esame_di_stato_2011_ordinamento_prova_tema_informatica_M070-parchi-regionali.pdf)\
 Si deve realizzare una web app che consenta ai cittadini di visualizzare le informazioni importanti delle specie presenti nei parchi italiani. In particolare, deve essere mostrato il numero di animali di una specie in un determinato parco e l'età media di questi animali.
 ### ⚙️ Tecnologie
 Per la realizzazione dell'applicazione sono state usate le seguenti tecnologie
