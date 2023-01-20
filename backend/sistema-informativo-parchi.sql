@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Gen 19, 2023 alle 22:13
+-- Creato il: Gen 20, 2023 alle 09:13
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.2.0
 
@@ -35,19 +35,20 @@ CREATE TABLE `animali` (
   `dataDiNascita` date NOT NULL,
   `id_parco` int(11) NOT NULL,
   `nome_animale` varchar(255) NOT NULL,
-  `statoSalute` varchar(255) NOT NULL,
-  `eta` int(11) NOT NULL
+  `statoSalute` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `animali`
 --
 
-INSERT INTO `animali` (`id_animale`, `id_specie`, `sesso`, `adulto`, `dataDiNascita`, `id_parco`, `nome_animale`, `statoSalute`, `eta`) VALUES
-(1, 2, 'M', b'1', '2022-01-19', 1, 'Gyno', 'Va bene', 0),
-(2, 2, 'F', b'1', '2022-11-07', 1, 'Cane', 'Ok', 0),
-(3, 1, 'M', b'1', '2023-01-11', 1, 'Gianni', 'Ha mangiato poco', 0),
-(4, 3, 'M', b'0', '2022-11-07', 2, 'Tigre', 'Perfetto', 0);
+INSERT INTO `animali` (`id_animale`, `id_specie`, `sesso`, `adulto`, `dataDiNascita`, `id_parco`, `nome_animale`, `statoSalute`) VALUES
+(1, 2, 'M', b'1', '2022-01-19', 1, 'Gyno', 'Va bene'),
+(2, 2, 'F', b'1', '2022-11-07', 1, 'Cane', 'Ok'),
+(3, 1, 'M', b'1', '2023-01-11', 1, 'Gianni', 'Ha mangiato poco'),
+(4, 3, 'M', b'0', '2022-11-07', 2, 'Tigre', 'Perfetto'),
+(5, 2, 'M', b'1', '1948-01-09', 1, 'Doggo', 'Stabile'),
+(6, 3, 'M', b'1', '2016-01-20', 2, 'Tigre', 'Perfetta');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,7 @@ CREATE TABLE `parchi` (
 --
 
 INSERT INTO `parchi` (`id_parco`, `nome_parco`, `regione`) VALUES
-(1, 'Parco del Serio', 'Grassobbio'),
+(1, 'Parco del Serio', 'Lombardia'),
 (2, 'Ompi di Brembate', 'Lombardia');
 
 -- --------------------------------------------------------
@@ -123,7 +124,7 @@ ALTER TABLE `specie`
 -- AUTO_INCREMENT per la tabella `animali`
 --
 ALTER TABLE `animali`
-  MODIFY `id_animale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_animale` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la tabella `parchi`
